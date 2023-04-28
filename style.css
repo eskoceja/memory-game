@@ -16,9 +16,8 @@ body {
 }
 
 /* CHECK HEADERS! */
-h1, h2 {
-  padding: 2rem;
-  margin: 2rem;
+h1 {
+  padding-top: 100px;
 }
 
 section {

@@ -1,7 +1,9 @@
 // Calling Elements
 const section = document.querySelector("section");
 const playerLivesCount = document.querySelector("span");
+let timer = document.querySelector("#timer");
 let playerLives = 12;
+let startTime;
 
 // Linking text
 playerLivesCount.textContent = playerLives;
@@ -93,7 +95,7 @@ const cardGenerator = () => {
 
     //Attach img src and attribute name
     face.src = item.imgSrc;
-    card.setAttribute("name", item.name); //check this
+    card.setAttribute("name", item.name);
 
     //Appending cards to section
     section.appendChild(card);
@@ -102,10 +104,22 @@ const cardGenerator = () => {
 
     //toggle class to toggle
     card.addEventListener("click", (e) => {
+      // Check if this is the first card clicked
+      if (!startTime) {
+        startTime = Date.now(); // Store the start time
+        setInterval(updateTimer, 1000); // Update the timer every second
+      }
+
       card.classList.toggle("toggleCard");
       checkCards(e);
     });
   });
+};
+
+// Function to update the timer with elapsed time
+const updateTimer = () => {
+  const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+  timer.textContent = `${elapsedTime} seconds`;
 };
 
 //Checking if cards match
